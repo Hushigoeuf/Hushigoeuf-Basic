@@ -108,12 +108,6 @@ namespace Hushigoeuf
         /// Сбрасывать ли кол-во вызовов при активации объекта
         [HGBorders] [HGRequired] public bool ResetNumbersOfCallsOnEnable = true;
 
-        /// Может быть вызван только один триггер за все существование объекта
-        [HGBorders] public bool OnlyOneTriggerAtOnce;
-
-        /// Может быть вызван только один триггер за все существование объекта
-        [HGBorders] public bool OnlyOneTriggerAtOnce2;
-
         /// Параметры основного триггера
 #if ODIN_INSPECTOR
         [Toggle(HGProgressToggleTrigger.TOGGLE_NAME)]

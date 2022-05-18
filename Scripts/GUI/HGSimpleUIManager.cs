@@ -411,7 +411,6 @@ namespace Hushigoeuf
                         HUDView.Hide(e.RequestID, e.Instant);
                     break;
                 case HGUIRequestTypes.ShowPauseView:
-                    "1".HGLog();
                     if (PauseView != null)
                         PauseView.Show(e.RequestID, e.Instant);
                     return;
