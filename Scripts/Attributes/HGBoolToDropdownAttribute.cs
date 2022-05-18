@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
+using System.Collections;
 #endif
 
 namespace Hushigoeuf
@@ -15,10 +15,12 @@ namespace Hushigoeuf
 #endif
     public class HGBoolToDropdownAttribute : Attribute
     {
+#if ODIN_INSPECTOR
         public static IEnumerable Values = new ValueDropdownList<bool>()
         {
             {"False", false},
             {"True", true},
         };
+#endif
     }
 }

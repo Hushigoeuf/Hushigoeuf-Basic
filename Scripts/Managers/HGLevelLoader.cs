@@ -182,7 +182,7 @@ namespace Hushigoeuf
                     if (CurrentList != null)
                         if (CurrentList.CurrentIndex < CurrentList.Count - 1)
                         {
-                            CurrentList.CurrentIndex--;
+                            CurrentList.CurrentIndex++;
                             LoadScene(CurrentList.CurrentSceneName);
                             break;
                         }
