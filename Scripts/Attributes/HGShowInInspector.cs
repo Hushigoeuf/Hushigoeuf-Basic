@@ -44,4 +44,23 @@ namespace Hushigoeuf
     public class HGShowInDebug : Attribute
     {
     }
+
+#if ODIN_INSPECTOR
+    [IncludeMyAttributes]
+    [FoldoutGroup(HGEditor.PATH_GROUP_DEBUG)]
+    [ReadOnly]
+    [ShowInInspector]
+#endif
+    public class HGDebugField : Attribute
+    {
+    }
+
+#if ODIN_INSPECTOR
+    [IncludeMyAttributes]
+    [FoldoutGroup(HGEditor.PATH_GROUP_DEBUG)]
+    [ShowInInspector]
+#endif
+    public class HGDebugEditField : Attribute
+    {
+    }
 }

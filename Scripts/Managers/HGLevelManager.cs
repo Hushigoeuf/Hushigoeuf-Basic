@@ -36,6 +36,8 @@ namespace Hushigoeuf
         /// В качестве следующего уровня выбрать параметры загрузчика, а не брать из общего списка уровней
         [HGShowInSettings] [HGBorders] public bool NextInsteadList;
 
+        [HGShowInSettings] [HGBorders] public bool GameOverOnPlayerDeath;
+
         /// Задержка перед объявлением проигрыша
 #if ODIN_INSPECTOR
         [MinValue(0)]
@@ -51,7 +53,7 @@ namespace Hushigoeuf
         [HGShowInSettings]
         [HGBorders]
         public float DelayBeforeFinished;
-
+        
         [NonSerialized] public bool IsLoaded;
         [NonSerialized] public bool IsStarted;
         [NonSerialized] public bool IsFailed;
@@ -207,6 +209,11 @@ namespace Hushigoeuf
 
                 case HGGameEventTypes.FinishLevelRequest:
                     FinishLevel();
+                    break;
+
+                case HGGameEventTypes.PlayerDeath:
+                    if (GameOverOnPlayerDeath)
+                        HGGameEvent.Trigger(HGGameEventTypes.GameOverRequest);
                     break;
             }
         }

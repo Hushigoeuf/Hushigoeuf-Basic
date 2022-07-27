@@ -28,4 +28,12 @@ namespace Hushigoeuf
     public class HGShowInInspectorAttribute : Attribute
     {
     }
+
+#if ODIN_INSPECTOR
+    [IncludeMyAttributes]
+    [AssetsOnly]
+#endif
+    public class HGAssetsOnlyAttribute : Attribute
+    {
+    }
 }

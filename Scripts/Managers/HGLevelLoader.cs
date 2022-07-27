@@ -73,6 +73,8 @@ namespace Hushigoeuf
         /// Отключить асинхронный режим загрузки дочерней сцены
         [HGShowInSettings] public bool Instant;
 
+        [HGShowInSettings] public bool FadeDisabled;
+
         /// Целевой список уровней (можно использовать HGLevelListManager и не трогать это)
         [HGShowInBindings] public HGLevelList TargetList;
 
@@ -195,18 +197,42 @@ namespace Hushigoeuf
                     break;
 
                 case HGLevelLoaderEventTypes.FadeAndBackScene:
-                    _currentEventOnFadeFinished = HGLevelLoaderEventTypes.BackScene;
-                    FadeAndLoadScene(null);
+                    if (!FadeDisabled)
+                    {
+                        _currentEventOnFadeFinished = HGLevelLoaderEventTypes.BackScene;
+                        FadeAndLoadScene(null);
+                    }
+                    else
+                    {
+                        HGLevelLoaderEvent.Trigger(HGLevelLoaderEventTypes.BackScene);
+                    }
+
                     break;
 
                 case HGLevelLoaderEventTypes.FadeAndNextScene:
-                    _currentEventOnFadeFinished = HGLevelLoaderEventTypes.NextScene;
-                    FadeAndLoadScene(null);
+                    if (!FadeDisabled)
+                    {
+                        _currentEventOnFadeFinished = HGLevelLoaderEventTypes.NextScene;
+                        FadeAndLoadScene(null);
+                    }
+                    else
+                    {
+                        HGLevelLoaderEvent.Trigger(HGLevelLoaderEventTypes.NextScene);
+                    }
+
                     break;
 
                 case HGLevelLoaderEventTypes.FadeAndRestartScene:
-                    _currentEventOnFadeFinished = HGLevelLoaderEventTypes.RestartScene;
-                    FadeAndLoadScene(null);
+                    if (!FadeDisabled)
+                    {
+                        _currentEventOnFadeFinished = HGLevelLoaderEventTypes.RestartScene;
+                        FadeAndLoadScene(null);
+                    }
+                    else
+                    {
+                        HGLevelLoaderEvent.Trigger(HGLevelLoaderEventTypes.RestartScene);
+                    }
+
                     break;
             }
         }
