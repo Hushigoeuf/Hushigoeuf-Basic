@@ -44,7 +44,8 @@ namespace Hushigoeuf
         }
     }
 
-    public abstract class HGSingletonListMonoBehaviour<T> : HGFullyMonoBehaviour where T : Component
+    public abstract class HGSingletonListMonoBehaviour<T> : HGFullyMonoBehaviour
+        where T : HGSingletonListMonoBehaviour<T>
     {
         public static Dictionary<string, T> Instances = new Dictionary<string, T>();
 
@@ -81,7 +82,7 @@ namespace Hushigoeuf
             if (Instances.ContainsKey(instanceID))
                 return Instances[instanceID];
             if (findIfNotContains)
-                foreach (var instance in FindObjectsOfType<InputManager>())
+                foreach (var instance in FindObjectsOfType<T>())
                     if (instance.InstanceID == instanceID)
                         return instance as T;
             return null;
