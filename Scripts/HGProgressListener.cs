@@ -4,25 +4,18 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
-    /// <summary>
-    /// Параметры триггера.
-    /// </summary>
     [HGBorders]
     [Serializable]
     public class HGProgressTrigger
     {
-        /// Тип триггера/действия над прогрессом
         public HGProgressTriggerTypes TriggerType;
 
-        /// Значение которое будет привязано к вызовам
         public float TargetValue;
 
-        /// Ограничить кол-во вызовов
         public bool LimitNumberOfCalls = true;
 
-        /// Максимальное кол-во вызовов
 #if ODIN_INSPECTOR
         [EnableIf(nameof(LimitNumberOfCalls))] [MinValue(1)]
 #endif
@@ -30,9 +23,6 @@ namespace Hushigoeuf
 
         [NonSerialized] public int CurrentNumberOfCalls;
 
-        /// <summary>
-        /// Вызвать триггер (отправит событие-запрос для контроллеров прогресса).
-        /// </summary>
         public virtual void CallTrigger(string progressID)
         {
             if (string.IsNullOrEmpty(progressID)) return;
@@ -43,22 +33,18 @@ namespace Hushigoeuf
 
             switch (TriggerType)
             {
-                // Установить значение
                 case HGProgressTriggerTypes.SetValue:
                     HGProgressEvent.Trigger(progressID, HGProgressEventTypes.SetValueRequest, TargetValue);
                     break;
 
-                // Расширить значение
                 case HGProgressTriggerTypes.ExtendValue:
                     HGProgressEvent.Trigger(progressID, HGProgressEventTypes.ExtendValueRequest, TargetValue);
                     break;
 
-                // Установить лимит для значения
                 case HGProgressTriggerTypes.SetLimit:
                     HGProgressEvent.Trigger(progressID, HGProgressEventTypes.SetLimitRequest, TargetValue);
                     break;
 
-                // Расширить лимит для значения
                 case HGProgressTriggerTypes.ExtendLimit:
                     HGProgressEvent.Trigger(progressID, HGProgressEventTypes.ExtendLimitRequest, TargetValue);
                     break;
@@ -66,9 +52,6 @@ namespace Hushigoeuf
         }
     }
 
-    /// <summary>
-    /// Параметры триггера для инспектора.
-    /// </summary>
     [Serializable]
     public class HGProgressToggleTrigger : HGProgressTrigger
     {
@@ -96,43 +79,32 @@ namespace Hushigoeuf
         ExtendLimit,
     }
 
-    /// <summary>
-    /// Изменяет параметры прогресса по заданным критериям.
-    /// </summary>
     [AddComponentMenu(HGEditor.PATH_MENU_COMMON + nameof(HGProgressListener))]
     public class HGProgressListener : HGMonoBehaviour, HGEventListener<HGProgressEvent>
     {
-        /// Целевой ID прогресса
         [HGBorders] [HGRequired] public string ProgressID;
-
-        /// Сбрасывать ли кол-во вызовов при активации объекта
         [HGBorders] [HGRequired] public bool ResetNumbersOfCallsOnEnable = true;
 
-        /// Параметры основного триггера
 #if ODIN_INSPECTOR
         [Toggle(HGProgressToggleTrigger.TOGGLE_NAME)]
 #endif
         public HGProgressToggleTrigger MainTrigger;
 
-        /// Параметры стартового триггера
 #if ODIN_INSPECTOR
         [Toggle(HGProgressToggleTrigger.TOGGLE_NAME)]
 #endif
         public HGProgressToggleTrigger InitializeTrigger;
 
-        /// Параметры триггера при активации объекта
 #if ODIN_INSPECTOR
         [Toggle(HGProgressToggleTrigger.TOGGLE_NAME)]
 #endif
         public HGProgressToggleTrigger EnableTrigger;
 
-        /// Параметры триггера при деактивации объекта
 #if ODIN_INSPECTOR
         [Toggle(HGProgressToggleTrigger.TOGGLE_NAME)]
 #endif
         public HGProgressToggleTrigger DisableTrigger;
 
-        /// Параметры триггера при уничтожении объекта
 #if ODIN_INSPECTOR
         [Toggle(HGProgressToggleTrigger.TOGGLE_NAME)]
 #endif
@@ -179,45 +151,30 @@ namespace Hushigoeuf
             CallDestroyTrigger();
         }
 
-        /// <summary>
-        /// Вызывает основной триггер.
-        /// </summary>
         public virtual void CallMainTrigger()
         {
             if (MainTrigger != null)
                 MainTrigger.TryTrigger(ProgressID);
         }
 
-        /// <summary>
-        /// Вызывает стартовый триггер.
-        /// </summary>
         public virtual void CallInitializeTrigger()
         {
             if (InitializeTrigger != null)
                 InitializeTrigger.TryTrigger(ProgressID);
         }
 
-        /// <summary>
-        /// Вызывает триггер при активации объекта.
-        /// </summary>
         public virtual void CallEnableTrigger()
         {
             if (EnableTrigger != null)
                 EnableTrigger.TryTrigger(ProgressID);
         }
 
-        /// <summary>
-        /// Вызывает триггер при деактивации объекта.
-        /// </summary>
         public virtual void CallDisableTrigger()
         {
             if (DisableTrigger != null)
                 DisableTrigger.TryTrigger(ProgressID);
         }
 
-        /// <summary>
-        /// Вызывает триггер при уничтожении объекта.
-        /// </summary>
         public virtual void CallDestroyTrigger()
         {
             if (DestroyTrigger != null)

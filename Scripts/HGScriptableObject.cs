@@ -6,11 +6,8 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
-    /// <summary>
-    /// Класс-оболочка для ScriptableObject в Unity.
-    /// </summary>
     public abstract class HGScriptableObject : ScriptableObject
     {
         protected const int EDITOR_MIN_ORDER = int.MinValue;

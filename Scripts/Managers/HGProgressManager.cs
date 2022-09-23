@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Специальный менеджер, который работает с заданным прогрессом и
@@ -9,10 +9,8 @@ namespace Hushigoeuf
     [AddComponentMenu(HGEditor.PATH_MENU_COMMON + nameof(HGProgressManager))]
     public class HGProgressManager : HGMonoBehaviour, HGEventListener<HGProgressEvent>
     {
-        /// ID целевого прогресса
         [HGShowInSettings] [HGRequired] public string ProgressID;
 
-        /// Завершить ли уровень при достижение целевого значения
         [HGShowInSettings] public bool FinishLevelOnCompleted = true;
 
         protected bool _completed;
@@ -27,9 +25,6 @@ namespace Hushigoeuf
             this.HGEventStopListening();
         }
 
-        /// <summary>
-        /// Вызывается при достижении прогресса целевого значения.
-        /// </summary>
         protected virtual void OnProgressCompleted()
         {
             if (_completed) return;

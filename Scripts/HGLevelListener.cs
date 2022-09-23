@@ -1,4 +1,4 @@
-﻿namespace Hushigoeuf
+﻿namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Базовый класс, который следит за статусом загрузки уровня.

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     public enum HGUpdateEventTypes
     {
@@ -37,10 +37,6 @@ namespace Hushigoeuf
         }
     }
 
-    /// <summary>
-    /// Менеджер событий для Update, FixedUpdate, LateUpdate.
-    /// Пока работает через HGEventManager.
-    /// </summary>
     [AddComponentMenu(HGEditor.PATH_MENU_COMMON + nameof(HGUpdateManager))]
     public class HGUpdateManager : HGSingletonMonoBehaviour<HGUpdateManager>
     {

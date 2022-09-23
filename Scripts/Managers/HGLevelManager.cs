@@ -5,11 +5,11 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Базовый менеджер, который следит за уровнем, делает рестарт,
-    /// завершает уровень, взаимодействует с соответствующим интерфейсом и т.п.
+    /// завершает уровень, взаимодействует с игровым интерфейсом.
     /// </summary>
     [AddComponentMenu(HGEditor.PATH_MENU_COMMON + nameof(HGLevelManager))]
     public class HGLevelManager : HGSingletonMonoBehaviour<HGLevelManager>,
@@ -18,7 +18,6 @@ namespace Hushigoeuf
         /// Объявить старт уровня вне этого менеджера
         [HGShowInSettings] [HGBorders] public bool StartLevelFromOther;
 
-        /// Задержка перед стартом уровня
 #if ODIN_INSPECTOR
         [MinValue(0)]
         [DisableIf(nameof(StartLevelFromOther))]
@@ -38,7 +37,6 @@ namespace Hushigoeuf
 
         [HGShowInSettings] [HGBorders] public bool GameOverOnPlayerDeath;
 
-        /// Задержка перед объявлением проигрыша
 #if ODIN_INSPECTOR
         [MinValue(0)]
 #endif
@@ -46,14 +44,13 @@ namespace Hushigoeuf
         [HGBorders]
         public float DelayBeforeGameOver;
 
-        /// Задержка перед объявлением завершения уровня
 #if ODIN_INSPECTOR
         [MinValue(0)]
 #endif
         [HGShowInSettings]
         [HGBorders]
         public float DelayBeforeFinished;
-        
+
         [NonSerialized] public bool IsLoaded;
         [NonSerialized] public bool IsStarted;
         [NonSerialized] public bool IsFailed;
@@ -119,9 +116,6 @@ namespace Hushigoeuf
             OnLevelStarted();
         }
 
-        /// <summary>
-        /// Вызывается когда уровню дан старт.
-        /// </summary>
         protected virtual void OnLevelStarted()
         {
             HGGameEvent.Trigger(HGGameEventTypes.LevelStarted);
@@ -148,9 +142,6 @@ namespace Hushigoeuf
             OnGameOver();
         }
 
-        /// <summary>
-        /// Вызывается единожды когда пора объявить проигрыш.
-        /// </summary>
         protected virtual void OnGameOver()
         {
             HGGameEvent.Trigger(HGGameEventTypes.GameOver);
@@ -182,9 +173,6 @@ namespace Hushigoeuf
             OnLevelFinished();
         }
 
-        /// <summary>
-        /// Вызывается единожды когда пора завершить уровень.
-        /// </summary>
         protected virtual void OnLevelFinished()
         {
             HGGameEvent.Trigger(HGGameEventTypes.LevelFinished);

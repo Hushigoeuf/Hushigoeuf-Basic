@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     public enum HGLevelLoaderEventTypes
     {
@@ -52,7 +52,6 @@ namespace Hushigoeuf
     public class HGLevelLoader : HGSingletonMonoBehaviour<HGLevelLoader>,
         HGEventListener<HGLevelLoaderEvent>, HGEventListener<HGUICallbackEvent>
     {
-        /// Целевая сцена на которую можно вернуться в случае соответствующего запроса
 #if UNITY_EDITOR && ODIN_INSPECTOR
         [OnValueChanged(nameof(EditorOnInitScenes))]
 #endif
@@ -61,7 +60,6 @@ namespace Hushigoeuf
         public SceneAsset TargetBackScene;
 #endif
 
-        /// Целевая сцена на которую можно перейти в случае соответствующего запроса
 #if UNITY_EDITOR && ODIN_INSPECTOR
         [OnValueChanged(nameof(EditorOnInitScenes))]
 #endif

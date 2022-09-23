@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Позволяет перейти по заданной ссылке при нажатии на кнопке.
@@ -10,11 +10,9 @@ namespace Hushigoeuf
     [AddComponentMenu(HGEditor.PATH_MENU_GUI + nameof(HGOpenURLButton))]
     public class HGOpenURLButton : HGMonoBehaviour
     {
-        /// Целевая ссылка
         [HGShowInSettings] [HGBorders] [HGRequired] [SerializeField]
         public string URL;
 
-        /// Автоматически "подслушивать" нажатие
         [HGShowInSettings] [HGBorders] [SerializeField]
         public bool AutomaticAddListener = true;
 
@@ -40,9 +38,6 @@ namespace Hushigoeuf
                     _button.onClick.RemoveListener(OpenURL);
         }
 
-        /// <summary>
-        /// Перейти по заданной ссылке в интернет-браузер.
-        /// </summary>
         public virtual void OpenURL()
         {
             if (!string.IsNullOrEmpty(URL))

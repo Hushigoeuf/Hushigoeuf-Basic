@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     public enum HGProgressEventTypes
     {
@@ -81,14 +81,12 @@ namespace Hushigoeuf
         /// В какую сторону идут вычисления (по умолчанию, в положительную, от 0 до 10 и до бесконечности)
         [HGShowInSettings] [Range(0, 1)] public int LeftOrRight = 1;
 
-        /// Минимальное значение прогресса
 #if ODIN_INSPECTOR
         [MaxValue("$" + nameof(MaxValue))]
 #endif
         [HGShowInSettings]
         public float MinValue;
 
-        /// Стартовое значение прогресса
 #if ODIN_INSPECTOR
         [MinValue("$" + nameof(MinValue))]
         [MaxValue("$" + nameof(MaxValue))]
@@ -96,7 +94,6 @@ namespace Hushigoeuf
         [HGShowInSettings]
         public float InitValue = 2;
 
-        /// Максимальное значение прогресса
 #if ODIN_INSPECTOR
         [MinValue("$" + nameof(MinValue))]
 #endif
@@ -135,9 +132,6 @@ namespace Hushigoeuf
             this.HGEventStopListening();
         }
 
-        /// <summary>
-        /// Инициализирует новое действие с контроллером по заданному ID.
-        /// </summary>
         protected virtual bool StartAction(string actionID)
         {
             if (!string.IsNullOrEmpty(actionID))
@@ -150,9 +144,6 @@ namespace Hushigoeuf
             return false;
         }
 
-        /// <summary>
-        /// Отмечает, что действие с контроллером завершено.
-        /// </summary>
         protected virtual bool UseAction(string actionID)
         {
             if (string.IsNullOrEmpty(actionID) ||
@@ -164,9 +155,6 @@ namespace Hushigoeuf
             return true;
         }
 
-        /// <summary>
-        /// Заканчивает действие с контроллером по заданному ID.
-        /// </summary>
         protected virtual bool StopAction(string actionID)
         {
             if (!string.IsNullOrEmpty(actionID))
@@ -179,17 +167,14 @@ namespace Hushigoeuf
             return false;
         }
 
-        /// <summary>
-        /// Установить значение для прогресса.
-        /// </summary>
         public virtual void SetValue(float value)
         {
             if (_blocked) return;
 
-            var oldValue = _currentValue;
+            float oldValue = _currentValue;
             _currentValue = Mathf.Clamp(value, MinValue, MaxValue);
 
-            var leftOrRightChanged = -1;
+            int leftOrRightChanged = -1;
             if (_currentValue > oldValue)
                 leftOrRightChanged = 1;
             else if (_currentValue < oldValue)
@@ -202,7 +187,7 @@ namespace Hushigoeuf
             else
                 TriggerEvent(HGProgressEventTypes.ValueDecreased, oldValue - _currentValue);
 
-            var leftOrRightCompleted = -1;
+            int leftOrRightCompleted = -1;
             if (_currentValue <= MinValue)
                 leftOrRightCompleted = 0;
             else if (_currentValue >= MaxValue)
@@ -217,9 +202,6 @@ namespace Hushigoeuf
                     _blocked = true;
         }
 
-        /// <summary>
-        /// Расширить значения прогресса (например, прогресс 10 при задании в +1 установит прогресс в 11).
-        /// </summary>
         public virtual void ExtendValue(float value)
         {
             if (LeftOrRight == 1)
@@ -227,9 +209,6 @@ namespace Hushigoeuf
             else SetValue(_currentValue - value);
         }
 
-        /// <summary>
-        /// Установить лимитное значение для прогресса.
-        /// </summary>
         public virtual void SetLimit(float value)
         {
             if (LeftOrRight == 1)
@@ -241,9 +220,6 @@ namespace Hushigoeuf
             TriggerEvent(HGProgressEventTypes.LimitChanged);
         }
 
-        /// <summary>
-        /// Расширить лимит аналогично расширению значения.
-        /// </summary>
         public virtual void ExtendLimit(float value)
         {
             if (LeftOrRight == 1)
@@ -262,41 +238,34 @@ namespace Hushigoeuf
 
             switch (e.EventType)
             {
-                // Отдаем параметры прогресса в ответ на запрос обратной связи
                 case HGProgressEventTypes.ResponseRequest:
                     TriggerEvent(HGProgressEventTypes.Responsed);
                     break;
 
-                // Установить значение
                 case HGProgressEventTypes.SetValueRequest:
                     if (UseAction(e.ProgressID))
                         SetValue(e.EventValue);
                     break;
 
-                // Расширить значение
                 case HGProgressEventTypes.ExtendValueRequest:
                     if (UseAction(e.ActionID))
                         ExtendValue(e.EventValue);
                     break;
 
-                // Установить лимит на значение
                 case HGProgressEventTypes.SetLimitRequest:
                     if (UseAction(e.ActionID))
                         SetLimit(e.EventValue);
                     break;
 
-                // Расширить лимит на значение
                 case HGProgressEventTypes.ExtendLimitRequest:
                     if (UseAction(e.ActionID))
                         ExtendLimit(e.EventValue);
                     break;
 
-                // Инициализировать новое действие с контроллером
                 case HGProgressEventTypes.StartActionRequest:
                     StartAction(e.ActionID);
                     break;
 
-                // Завершить действие с контроллером
                 case HGProgressEventTypes.StopActionRequest:
                     StopAction(e.ActionID);
                     break;

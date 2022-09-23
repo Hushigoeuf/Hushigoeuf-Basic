@@ -2,11 +2,8 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
-    /// <summary>
-    /// Класс-оболочка для стандартного класса Resources в Unity.
-    /// </summary>
     public sealed class HGResources
     {
         public const string START_PATH = HGEditor.BASE + HGEditor.SEPARATOR;

@@ -3,7 +3,7 @@
 using Sirenix.OdinInspector;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
 #if ODIN_INSPECTOR
     [IncludeMyAttributes]

@@ -7,13 +7,12 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     [HGBorders]
     [Serializable]
     public class HGLevelListValue
     {
-        /// Целевая сцена, которая будет подгружаться в основной сцене
 #if UNITY_EDITOR && ODIN_INSPECTOR
         [OnValueChanged(nameof(EditorInitScene))]
 #endif
@@ -22,10 +21,9 @@ namespace Hushigoeuf
         [SerializeField]
         protected SceneAsset _scene;
 #endif
-        /// Имя целевой сцены (задается автоматически)
+
         [HGBorders] [HGReadOnly] public string SceneName;
 
-        /// Персональные настройки уровня
         [HGBorders] public HGLevelSettings Settings;
 
 #if UNITY_EDITOR && ODIN_INSPECTOR
@@ -39,9 +37,6 @@ namespace Hushigoeuf
 #endif
     }
 
-    /// <summary>
-    /// Хранит список уровней для игры с соответствующей системой.
-    /// </summary>
     [CreateAssetMenu(menuName = HGEditor.PATH_MENU_COMMON + nameof(HGLevelList))]
     public class HGLevelList : HGScriptableObject
     {
@@ -57,22 +52,12 @@ namespace Hushigoeuf
         [SerializeField]
         private int _currentIndex;
 
-        /// Возвращает общее кол-во уровней в спике
         public virtual int Count => Levels.Length;
-
-        /// Возвращает первый возможный индекс
         public virtual int FirstIndex => 0;
-
-        /// Возвращает последний возможный индекс
         public virtual int LastIndex => Count != 0 ? Count - 1 : 0;
-
-        /// Возвращает информацию о выбранном уровне
         public HGLevelListValue CurrentLevel => Levels[_currentIndex];
-
-        /// Возвращает имя сцены выбранного уровня
         public virtual string CurrentSceneName => CurrentLevel.SceneName;
 
-        /// Индекс выбранного уровня
         public virtual int CurrentIndex
         {
             get => _currentIndex;
@@ -80,9 +65,6 @@ namespace Hushigoeuf
         }
     }
 
-    /// <summary>
-    /// Базовый класс для персональных настроек уровня.
-    /// </summary>
     public abstract class HGLevelSettings : HGScriptableObject
     {
     }

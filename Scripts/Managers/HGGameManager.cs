@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Базовый игровой менеджер.
@@ -9,7 +9,6 @@ namespace Hushigoeuf
     [AddComponentMenu(HGEditor.PATH_MENU_COMMON + nameof(HGGameManager))]
     public class HGGameManager : HGSingletonMonoBehaviour<HGGameManager>, HGEventListener<HGGameEvent>
     {
-        /// Была ли остановлена игра
         [NonSerialized] public bool IsPaused;
 
         protected override void OnEnable()
@@ -26,9 +25,6 @@ namespace Hushigoeuf
             this.HGEventStopListening();
         }
 
-        /// <summary>
-        /// Поставить игру на паузу.
-        /// </summary>
         public virtual void Pause()
         {
             if (IsPaused) return;
@@ -43,9 +39,6 @@ namespace Hushigoeuf
             HGUIRequestEvent.Trigger(HGUIRequestTypes.ShowPauseView);
         }
 
-        /// <summary>
-        /// Продолжить игру если она была остановлена.
-        /// </summary>
         public virtual void UnPause()
         {
             if (!IsPaused) return;

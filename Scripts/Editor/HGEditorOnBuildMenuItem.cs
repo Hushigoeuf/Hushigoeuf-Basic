@@ -1,11 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
-    /// <summary>
-    /// Находит компоненты с IHGEditorOnBuild, чтобы вызвать метод OnHGEditorBuild.
-    /// </summary>
     public class HGEditorOnBuildMenuItem
     {
         [MenuItem(HGEditor.MENU_ITEM_PATH + nameof(IHGEditorOnBuild.OnHGEditorBuild), false,

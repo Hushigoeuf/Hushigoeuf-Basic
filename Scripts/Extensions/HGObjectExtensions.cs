@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     public static class HGObjectExtensions
     {

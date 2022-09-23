@@ -1,4 +1,4 @@
-﻿namespace Hushigoeuf
+﻿namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Базовый класс для работы с заданным прогрессом.
@@ -6,7 +6,6 @@
     /// </summary>
     public abstract class HGProgressHandler : HGMonoBehaviour, HGEventListener<HGProgressEvent>
     {
-        /// ID прогресс с которым будет работать обработчик
         [HGShowInSettings] [HGRequired] public string ProgressID;
 
         /// <summary>
@@ -27,19 +26,10 @@
             this.HGEventStopListening();
         }
 
-        /// <summary>
-        /// Устанавливает минимальное и максимальное значения.
-        /// </summary>
         protected abstract void SetLimit(float min, float max);
 
-        /// <summary>
-        /// Устанавливает текущее значение.
-        /// </summary>
         protected abstract void SetValue(float value);
 
-        /// <summary>
-        /// Принимает изменения в рамках заданного прогресса.
-        /// </summary>
         public virtual void OnHGEvent(HGProgressEvent e)
         {
             if (e.ProgressID != ProgressID) return;

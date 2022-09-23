@@ -3,11 +3,8 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
-    /// <summary>
-    /// См. HGBordersAttribute.
-    /// </summary>
     [DrawerPriority(1)]
     public class HGEditorBordersAttributeDrawer : OdinAttributeDrawer<HGBordersAttribute>
     {

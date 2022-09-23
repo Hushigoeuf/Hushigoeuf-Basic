@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Этот менеджер просто хранит целевой список уровней.

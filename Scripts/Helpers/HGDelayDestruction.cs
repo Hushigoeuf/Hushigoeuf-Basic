@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Выполняет отложенное отключение или уничтожение объекта.

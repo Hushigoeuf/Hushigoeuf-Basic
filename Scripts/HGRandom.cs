@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
-    /// <summary>
-    /// Класс-оболочка для класса Random в Unity.
-    /// Так же имеет свои собственные методы для рандомизированных вычислений.
-    /// </summary>
     public partial class HGRandom
     {
         public static float Range(float min, float max) => Random.Range(min, max);
@@ -29,9 +25,9 @@ namespace Hushigoeuf
         public static void Shuffle<T>(T[] values)
         {
             var random = new System.Random();
-            for (var i = values.Length - 1; i >= 1; i--)
+            for (int i = values.Length - 1; i >= 1; i--)
             {
-                var j = random.Next(i + 1);
+                int j = random.Next(i + 1);
                 (values[j], values[i]) = (values[i], values[j]);
             }
         }
@@ -39,9 +35,9 @@ namespace Hushigoeuf
         public static void Shuffle<T>(List<T> values)
         {
             var random = new System.Random();
-            for (var i = values.Count - 1; i >= 1; i--)
+            for (int i = values.Count - 1; i >= 1; i--)
             {
-                var j = random.Next(i + 1);
+                int j = random.Next(i + 1);
                 (values[j], values[i]) = (values[i], values[j]);
             }
         }

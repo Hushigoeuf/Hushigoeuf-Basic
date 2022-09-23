@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
-    /// <summary>
-    /// Класс-оболочка для стандартных Debug-методов Unity.
-    /// </summary>
     public partial class HGDebug
     {
         public static void Log(object message)

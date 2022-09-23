@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// При нажатии на кнопку снимает паузу с игры.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     public enum HGUIRequestTypes
     {
@@ -35,9 +35,6 @@ namespace Hushigoeuf
         ResetHideViewFinished,
     }
 
-    /// <summary>
-    /// Событие, которое обрабатывает как запрос к менеджеру для выполнения действий с интерфейсом.
-    /// </summary>
     public struct HGUIRequestEvent
     {
         public string RequestID;
@@ -82,9 +79,6 @@ namespace Hushigoeuf
         }
     }
 
-    /// <summary>
-    /// Событие, которое срабатывает как обратная связь за действия с интерфейсом.
-    /// </summary>
     public struct HGUICallbackEvent
     {
         public string RequestID;
@@ -122,12 +116,8 @@ namespace Hushigoeuf
     [Serializable]
     public class HGUIManagerTarget
     {
-        /// Показать на старте сцены
         public bool ShowOnStart;
-
-        /// Воспроизвести после исчезновения затемнения
         public bool ShowOnStartUnFade;
-
         [HGRequired] public HGSimpleUIView View;
     }
 
@@ -138,13 +128,10 @@ namespace Hushigoeuf
     [AddComponentMenu(HGEditor.PATH_MENU_GUI + nameof(HGSimpleUIManager))]
     public class HGSimpleUIManager : HGMonoBehaviour, HGEventListener<HGUIRequestEvent>, HGEventListener<HGGameEvent>
     {
-        /// Снять ли эффект затемнения при загрузке сцены
         [HGShowInSettings] public bool UnFadeOnEnter = true;
 
-        /// Снять ли эффект затемнения при загрузке уровня
         [HGShowInSettings] public bool UnFadeOnLevelLoaded;
 
-        /// Воспроизвести базовый интерфейс после исчезновения затемнения
         [HGShowInSettings] public bool HUDOnUnFade = true;
 
         [HGShowInBindings] public HGSimpleUIView FaderView;
@@ -154,7 +141,6 @@ namespace Hushigoeuf
         [HGShowInBindings] public HGSimpleUIView GameOverView;
         [HGShowInBindings] public HGSimpleUIView FinishView;
 
-        /// Список представлений, которые выходят за рамки базовых решений
         [HGShowInBindings] [HGListDrawerSettings]
         public HGUIManagerTarget[] OtherTargets = new HGUIManagerTarget[0];
 
@@ -229,9 +215,6 @@ namespace Hushigoeuf
             this.HGEventStopListening<HGGameEvent>();
         }
 
-        /// <summary>
-        /// Воспроизвести эффект затемнения.
-        /// </summary>
         public virtual void Fade(string requestID, bool instant = false)
         {
             if (FaderView == null) return;
@@ -247,9 +230,6 @@ namespace Hushigoeuf
             Fade(null, instant);
         }
 
-        /// <summary>
-        /// Вызывается когда эффект затемнения воспроизведен.
-        /// </summary>
         protected virtual void FadeOnFinished()
         {
             FaderView.OnShowFinished.RemoveListener(FadeOnFinished);
@@ -259,9 +239,6 @@ namespace Hushigoeuf
             HGUICallbackEvent.Trigger(FaderView.CurrentRequestID, HGUICallbackTypes.FadeFinished);
         }
 
-        /// <summary>
-        /// Сбрасывает параметры фейдера.
-        /// </summary>
         protected virtual void ResetFader(bool visible)
         {
             FaderView.OnShowFinished.RemoveListener(FadeOnFinished);
@@ -269,9 +246,6 @@ namespace Hushigoeuf
             FaderView.Reset(visible);
         }
 
-        /// <summary>
-        /// Остановить эффект затемнения.
-        /// </summary>
         public virtual void UnFade(string requestID, bool instant = false)
         {
             if (FaderView == null) return;
@@ -288,9 +262,6 @@ namespace Hushigoeuf
             UnFade(null, instant);
         }
 
-        /// <summary>
-        /// Вызывается когда эффект затемнения остановлен.
-        /// </summary>
         protected virtual void UnFadeOnFinished()
         {
             FaderView.OnHideFinished.RemoveListener(UnFadeOnFinished);
@@ -309,9 +280,6 @@ namespace Hushigoeuf
             HGUICallbackEvent.Trigger(FaderView.CurrentRequestID, HGUICallbackTypes.UnFadeFinished);
         }
 
-        /// <summary>
-        /// Выполнить вспышку (быстрое затемнение и возврат).
-        /// </summary>
         public virtual void Flash(string requestID = null)
         {
             if (FlashView == null) return;
@@ -341,9 +309,6 @@ namespace Hushigoeuf
             FlashView.Reset(false);
         }
 
-        /// <summary>
-        /// Найти представление по имени (сюда же входят базовые представления вроде фейдера).
-        /// </summary>
         public virtual HGSimpleUIView GetView(string viewName)
         {
             for (var i = 0; i < _targets.Count; i++)
@@ -351,10 +316,7 @@ namespace Hushigoeuf
                     return _targets[i].View;
             return null;
         }
-        
-        /// <summary>
-        /// Показать заданное представление.
-        /// </summary>
+
         public virtual void ShowView(string viewName, string requestID, bool instant = false)
         {
             var view = GetView(viewName);
@@ -366,10 +328,7 @@ namespace Hushigoeuf
         {
             ShowView(viewName, null, instant);
         }
-        
-        /// <summary>
-        /// Скрыть заданное представление.
-        /// </summary>
+
         public virtual void HideView(string viewName, string requestID, bool instant = false)
         {
             var view = GetView(viewName);

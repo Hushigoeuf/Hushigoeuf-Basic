@@ -3,7 +3,7 @@
 using Sirenix.OdinInspector;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     public enum HGRotationTypes
     {
@@ -21,13 +21,11 @@ namespace Hushigoeuf
     {
         public HGRotationTypes RotationType = HGRotationTypes.LocalTransform;
 
-        /// Скорость вращения
 #if ODIN_INSPECTOR
         [DisableIf(nameof(RotationType), HGRotationTypes.Rigidbody2D)]
 #endif
         public Vector3 Speed;
 
-        /// Скорость вращения в 2D-пространстве
 #if ODIN_INSPECTOR
         [EnableIf(nameof(RotationType), HGRotationTypes.Rigidbody2D)]
 #endif
@@ -38,7 +36,6 @@ namespace Hushigoeuf
             set => Speed.z = value;
         }
 
-        /// Сбрасывать ли параметры к стартовым значениям при включении объекта
         public bool ResetOnEnable = true;
 
         protected Transform _transform;

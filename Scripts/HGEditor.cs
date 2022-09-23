@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Класс для работы в режиме редактора.
@@ -15,11 +15,9 @@ namespace Hushigoeuf
     /// </summary>
     public partial class HGEditor
     {
-        /// <summary>
-        /// Общие константы.
-        /// </summary>
+        // Общие константы:
+        // ----------------------------------------------------------------
         public const string SEPARATOR = "/";
-
         public const string SPACE = "\n";
         public const string TAB = "\t";
         public const string SPACE_TAB = SPACE + TAB;
@@ -29,19 +27,16 @@ namespace Hushigoeuf
         public const string TP = "ThirdParty";
         public const string CURRENT = "Current";
 
-        /// <summary>
-        /// Константы наименований групп в инспекторе (для OdinInspector).
-        /// </summary>
+        // Константы наименований групп в инспекторе (для OdinInspector):
+        // ----------------------------------------------------------------
         public const string GROUP_SETTINGS = "SETTINGS";
-
         public const string GROUP_INPUTS = "INPUTS";
         public const string GROUP_BINDINGS = "BINDINGS";
         public const string GROUP_EVENTS = "EVENTS";
         public const string GROUP_DEBUG = "DEBUG";
 
-        /// <summary>
-        /// Константы для стандартизации групп в инспекторе (для OdinInspector).
-        /// </summary>
+        // Константы для стандартизации групп в инспекторе (для OdinInspector):
+        // ----------------------------------------------------------------
         public const string PATH_GROUP_SETTINGS = GROUP_SETTINGS;
 
         public const string PATH_GROUP_INPUTS = GROUP_INPUTS;
@@ -49,11 +44,9 @@ namespace Hushigoeuf
         public const string PATH_GROUP_EVENTS = GROUP_EVENTS;
         public const string PATH_GROUP_DEBUG = GROUP_DEBUG;
 
-        /// <summary>
-        /// Константы для стандартизации путей.
-        /// </summary>
+        // Константы для стандартизации путей:
+        // ----------------------------------------------------------------
         public const string PATH_RESOURCES = HGResources.START_PATH;
-
         public const string PATH_ASSET = BASE + SEPARATOR;
         public const string PATH_ASSET_COMMON = PATH_ASSET + COMMON + SEPARATOR;
         public const string PATH_ASSET_GUI = PATH_ASSET + GUI + SEPARATOR;
@@ -65,9 +58,8 @@ namespace Hushigoeuf
         public const string PATH_MENU_TP = PATH_MENU + TP + SEPARATOR;
         public const string PATH_MENU_CURRENT = PATH_MENU + CURRENT + SEPARATOR;
 
-        /// <summary>
-        /// Константы для стандартизации MenuItem.
-        /// </summary>
+        // Константы для стандартизации MenuItem:
+        // ----------------------------------------------------------------
         public const string MENU_ITEM_PATH = nameof(GameObject) + SEPARATOR + BASE + SEPARATOR;
 
         public const int MENU_ITEM_PRIORITY = 0;
@@ -94,9 +86,6 @@ namespace Hushigoeuf
             }
         }
 
-        /// <summary>
-        /// Запускает игру.
-        /// </summary>
         public static void Play()
         {
 #if UNITY_EDITOR
@@ -105,9 +94,6 @@ namespace Hushigoeuf
 #endif
         }
 
-        /// <summary>
-        /// Ставит игру на паузу.
-        /// </summary>
         public static void Pause()
         {
 #if UNITY_EDITOR
@@ -116,9 +102,6 @@ namespace Hushigoeuf
 #endif
         }
 
-        /// <summary>
-        /// Останавливает игру.
-        /// </summary>
         public static void Stop()
         {
 #if UNITY_EDITOR

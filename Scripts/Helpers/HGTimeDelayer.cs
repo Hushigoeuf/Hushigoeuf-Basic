@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using Sirenix.OdinInspector;
 #endif
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Выполняет действия с задержкой перед выполнением.
@@ -13,7 +13,6 @@ namespace Hushigoeuf
     [AddComponentMenu(HGEditor.PATH_MENU_COMMON + nameof(HGTimeDelayer))]
     public class HGTimeDelayer : MonoBehaviour
     {
-        /// Размер задержки перед выполнением
 #if ODIN_INSPECTOR
         [MinValue(0)]
 #endif
@@ -22,10 +21,8 @@ namespace Hushigoeuf
         [SerializeField]
         public float DelayBeforeExecute;
 
-        /// Запустить ли отчет после старта
         [HGShowInSettings] [HGBorders] public bool AutoExecuteOnStart;
 
-        /// Запустить ли отчет после активации объекта
         [HGShowInSettings] [HGBorders] public bool AutoExecuteOnEnable;
 
         [HGShowInEvents] public UnityEvent OnExecuteEvent = new UnityEvent();

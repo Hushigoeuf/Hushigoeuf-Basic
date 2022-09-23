@@ -1,11 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
-    /// <summary>
-    /// Добавляет пустой объект с разделением в имени, чтобы сортировать иерархию.
-    /// </summary>
     public class HGEditorSeparatorMenuItem
     {
         [MenuItem(HGEditor.MENU_ITEM_PATH + "Create Separator", false, HGEditor.MENU_ITEM_PRIORITY + 0)]

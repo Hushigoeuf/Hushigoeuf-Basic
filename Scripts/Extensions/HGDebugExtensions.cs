@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     public static class HGDebugExtensions
     {

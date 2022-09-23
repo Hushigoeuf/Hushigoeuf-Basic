@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEditor;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     [InitializeOnLoad]
     public class HGEditorDefineSymbols

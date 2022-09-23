@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     [HGBorders]
     [Serializable]

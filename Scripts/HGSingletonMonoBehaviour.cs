@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
-    /// Класс-синглетон для MonoBehaviour в Unity.
+    /// НЕ ИСПОПОЛЬЗОВАТЬ БЕЗ НЕОБХОДИМОСТИ!!! СТАТИКА ЗЛО!!!
     /// </summary>
     public abstract class HGSingletonMonoBehaviour<T> : HGFullyMonoBehaviour where T : Component
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine.Events;
 
-namespace Hushigoeuf
+namespace Hushigoeuf.Basic
 {
     /// <summary>
     /// Базовый класс для UI-представления.
@@ -9,7 +9,6 @@ namespace Hushigoeuf
     /// </summary>
     public abstract class HGSimpleUIView : HGMonoBehaviour, HGEventListener<HGUIRequestEvent>
     {
-        /// Имя представления
         [HGShowInSettings] [HGBorders] [HGRequired]
         public string ViewName;
 
@@ -39,9 +38,6 @@ namespace Hushigoeuf
             this.HGEventStopListening();
         }
 
-        /// <summary>
-        /// Показать представление.
-        /// </summary>
         public virtual void Show(bool instant = false)
         {
             CurrentInstant = instant;
@@ -60,9 +56,6 @@ namespace Hushigoeuf
             Callback(HGUICallbackTypes.ShowViewFinished);
         }
 
-        /// <summary>
-        /// Скрыть представление.
-        /// </summary>
         public virtual void Hide(bool instant = false)
         {
             CurrentInstant = instant;
@@ -81,9 +74,6 @@ namespace Hushigoeuf
             Callback(HGUICallbackTypes.HideViewFinished);
         }
 
-        /// <summary>
-        /// Сбросить представление.
-        /// </summary>
         public virtual void Reset(bool visible)
         {
             this.HGSetActive(visible);
